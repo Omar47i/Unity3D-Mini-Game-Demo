@@ -13,8 +13,6 @@ public class DataParser : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-
         LoadMapData();
     }
 

@@ -12,7 +12,6 @@ public class PlayerInput : MonoBehaviour
 
     void Awake()
     {
-        print(Random.insideUnitCircle.ToString());
         rb = GetComponent<Rigidbody>();
     }
 
