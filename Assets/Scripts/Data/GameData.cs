@@ -6,14 +6,14 @@ using System;
 [System.Serializable]
 public class GameData
 {
-    public string MapSize;
-	public string TurretsNumber;
+    public int MapSize;
+	public int TurretsNumber;
 	public List<TurretLocation> TurretsLocations;
 }
 
 [System.Serializable]
 public class TurretLocation
 {
-	public string X;
-	public string Y;
+	public int X;
+	public int Y;
 }
