@@ -57,11 +57,14 @@ public class Grid : MonoBehaviour
         // Create turrets read from file with their position (Position are grid based like a two dimentional array)
         for (int i = 0; i < turretsSize; i++)
         {
-            float xWorldPos = gameData.TurretsLocations[i].X * nodeDiameter - (gameData.MapSize / 2f - nodeRadius);
-            float zWorldPos = gameData.TurretsLocations[i].Y * nodeDiameter - (gameData.MapSize / 2f - nodeRadius);
+            float xWorldPos = gameData.Turrets[i].X * nodeDiameter - (gameData.MapSize / 2f - nodeRadius);
+            float zWorldPos = gameData.Turrets[i].Y * nodeDiameter - (gameData.MapSize / 2f - nodeRadius);
             Vector3 worldPoint = new Vector3(xWorldPos, 1.5f, zWorldPos);
 
-            Instantiate(turretPrefab, worldPoint, Quaternion.identity, turretsParent.transform);
+            GameObject turret = Instantiate(turretPrefab, worldPoint, Quaternion.identity, turretsParent.transform);
+
+            // Initialize each turret with its projectile speed and coverage area
+            turret.GetComponent<Turret>().InitializeTurret(gameData.Turrets[i].ProjectileSpeed, gameData.Turrets[i].CoverageArea);
         }
     }
 }

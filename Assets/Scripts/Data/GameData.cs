@@ -8,12 +8,14 @@ public class GameData
 {
     public int MapSize;
 	public int TurretsNumber;
-	public List<TurretLocation> TurretsLocations;
+	public List<TurretsData> Turrets;
 }
 
 [System.Serializable]
-public class TurretLocation
+public class TurretsData
 {
 	public int X;
 	public int Y;
+    public int ProjectileSpeed;
+    public int CoverageArea;
 }

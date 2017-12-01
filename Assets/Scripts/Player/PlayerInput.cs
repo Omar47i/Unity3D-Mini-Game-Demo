@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     Rigidbody rb;
-    float speed = 10f;
+    float speed = 70f;
 
     float horAxis;
     float verAxis;
@@ -22,6 +22,6 @@ public class PlayerInput : MonoBehaviour
         
         Vector3 moveDir = transform.TransformDirection(horAxis, 0f, verAxis);
 
-        rb.AddForce(moveDir * 70f);
+        rb.AddForce(moveDir * speed);
     }
 }
