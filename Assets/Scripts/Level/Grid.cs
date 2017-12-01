@@ -9,7 +9,7 @@ public class Grid : MonoBehaviour
 
 	GameData gameData;                          // A class representing the parsed Json file
     float nodeRadius = .5f;
-    int nodeDiameter;
+    float nodeDiameter;
 
 	void Awake()
 	{
@@ -32,8 +32,8 @@ public class Grid : MonoBehaviour
 
 	void CreateGrid()
 	{
-		int mapSize = gameData.MapSize;
-		Vector3 worldBottomLeft = transform.position - Vector3.right * mapSize / 2 - Vector3.forward * mapSize / 2;
+		float mapSize = gameData.MapSize;
+		Vector3 worldBottomLeft = transform.position - Vector3.right * mapSize / 2f - Vector3.forward * mapSize / 2f;
 
         // Create the map as a grid of N size
         for (int x = 0; x < mapSize; x++)
@@ -57,8 +57,8 @@ public class Grid : MonoBehaviour
         // Create turrets read from file with their position (Position are grid based like a two dimentional array)
         for (int i = 0; i < turretsSize; i++)
         {
-            int xWorldPos = gameData.TurretsLocations[i].X * nodeDiameter;
-            int zWorldPos = gameData.TurretsLocations[i].Y * nodeDiameter;
+            float xWorldPos = gameData.TurretsLocations[i].X * nodeDiameter - (gameData.MapSize / 2f - nodeRadius);
+            float zWorldPos = gameData.TurretsLocations[i].Y * nodeDiameter - (gameData.MapSize / 2f - nodeRadius);
             Vector3 worldPoint = new Vector3(xWorldPos, 1.5f, zWorldPos);
 
             Instantiate(turretPrefab, worldPoint, Quaternion.identity, turretsParent.transform);
