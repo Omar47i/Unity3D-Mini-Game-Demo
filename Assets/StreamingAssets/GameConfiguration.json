@@ -1,37 +1,38 @@
 {
   "MapSize": "50",
   "TurretsNumber": "5",
+  "CoinsNumber": "20",
   
   "Turrets": [
     {
       "X": "20",
 	  "Y": "0",
-	  "ProjectileSpeed": "8",
-	  "CoverageArea": "8"
+	  "ProjectileSpeed": "10",
+	  "CoverageArea": "20"
     },
 	{
       "X": "40",
 	  "Y": "26",
-	  "ProjectileSpeed": "8",
-	  "CoverageArea": "8"
+	  "ProjectileSpeed": "10",
+	  "CoverageArea": "15"
     },
 	{
       "X": "31",
 	  "Y": "3",
-	  "ProjectileSpeed": "8",
-	  "CoverageArea": "8"
+	  "ProjectileSpeed": "10",
+	  "CoverageArea": "15"
     },
 	{
       "X": "10",
 	  "Y": "11",
-	  "ProjectileSpeed": "8",
-	  "CoverageArea": "8"
+	  "ProjectileSpeed": "10",
+	  "CoverageArea": "15"
     },
 	{
       "X": "25",
 	  "Y": "49",
-	  "ProjectileSpeed": "8",
-	  "CoverageArea": "8"
+	  "ProjectileSpeed": "10",
+	  "CoverageArea": "20"
     }
   ]
 }

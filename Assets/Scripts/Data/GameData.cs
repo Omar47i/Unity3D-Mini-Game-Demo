@@ -8,7 +8,9 @@ public class GameData
 {
     public int MapSize;
 	public int TurretsNumber;
-	public List<TurretsData> Turrets;
+    public int CoinsNumber;
+
+    public List<TurretsData> Turrets;
 }
 
 [System.Serializable]

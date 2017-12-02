@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Grid : MonoBehaviour 
 {
 	[SerializeField]
-	GameObject nodePrefab, turretPrefab;        // Map prefabs to be instantiated at the start of the game
+	GameObject nodePrefab, turretPrefab, coinPrefab;   // Map prefabs to be instantiated at the start of the game
 
-	GameData gameData;                          // A class representing the parsed Json file
+	GameData gameData;                                 // A class representing the parsed Json file
     float nodeRadius = .5f;
     float nodeDiameter;
 
@@ -25,12 +26,13 @@ public class Grid : MonoBehaviour
 		// Remove the listener once received the message to avoid memory leaks
 		DataParser.DataParsed.RemoveListener (OnDataParsed);
 
-		// Create the grid and turrets based on file values.
+		// Create the grid, turrets, and coins based on file values.
 		CreateGrid();
         CreateTurrets();
+        CreateCoins();
     }
 
-	void CreateGrid()
+    void CreateGrid()
 	{
 		float mapSize = gameData.MapSize;
 		Vector3 worldBottomLeft = transform.position - Vector3.right * mapSize / 2f - Vector3.forward * mapSize / 2f;
@@ -65,6 +67,33 @@ public class Grid : MonoBehaviour
 
             // Initialize each turret with its projectile speed and coverage area
             turret.GetComponent<Turret>().InitializeTurret(gameData.Turrets[i].ProjectileSpeed, gameData.Turrets[i].CoverageArea);
+        }
+    }
+
+    private void CreateCoins()
+    {
+        GameObject coinsParent = new GameObject("Coins");
+
+        int mapSize = gameData.MapSize;
+        int coinsCount = gameData.CoinsNumber;
+
+        // store random indices in this dic to avoid coin position duplication
+        Dictionary<int, int> coinsIndices = new Dictionary<int, int>();
+
+        // set total coins to check for winning situation
+        GameController.Instance.totalCoins = gameData.CoinsNumber;
+
+        // Create the coins distributed through the grid
+        for (int i = 0; i < coinsCount; i++)
+        {
+            int ranX = UnityEngine.Random.Range(0, mapSize);
+            int ranY = UnityEngine.Random.Range(0, mapSize);
+
+            float xWorldPos = ranX * nodeDiameter - (gameData.MapSize / 2f - nodeRadius);
+            float zWorldPos = ranY * nodeDiameter - (gameData.MapSize / 2f - nodeRadius);
+            Vector3 worldPoint = new Vector3(xWorldPos, 1f, zWorldPos);
+
+            Instantiate(coinPrefab, worldPoint, Quaternion.identity, coinsParent.transform);
         }
     }
 }

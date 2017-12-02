@@ -4,24 +4,40 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    Rigidbody rb;
-    float speed = 70f;
+    Transform mainCamera;          // to move the player in the forward direction of the camera
 
-    float horAxis;
-    float verAxis;
+    Rigidbody rb;
+    float speed = 10f;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        mainCamera = Camera.main.transform;
     }
 
     void FixedUpdate()
     {
-        float horAxis = Input.GetAxis("Horizontal");
-        float verAxis = Input.GetAxis("Vertical");
-        
-        Vector3 moveDir = transform.TransformDirection(horAxis, 0f, verAxis);
+        float horAxis = Input.GetAxisRaw("Horizontal");
+        float verAxis = Input.GetAxisRaw("Vertical");
 
-        rb.AddForce(moveDir * speed);
+        //Vector3 moveDir = transform.TransformDirection(horAxis, 0f, verAxis);
+        //Vector3 moveDir = new Vector3(horAxis, 0f, verAxis);
+        Vector3 moveDir = mainCamera.TransformDirection(horAxis, 0f, verAxis);
+
+        rb.velocity = moveDir * speed;
+
+        //if (horAxis == 0f && verAxis == 0f)
+        //{
+        //    rb.velocity = Vector3.zero;
+        //}
+    }
+
+    void Update()
+    {
+        if (GameController.gameState != GameController.GameState.Playing)
+        {
+            enabled = false;
+        }
     }
 }

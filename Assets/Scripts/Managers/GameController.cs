@@ -7,8 +7,13 @@ public class GameController : MonoBehaviour
     public enum GameState
     {
         Playing,
-        GameOver
+        GameOver,
+        GameCompleted
     }
+
+    [HideInInspector]
+    public int coins = 0;      // starting number of coins
+    public int totalCoins;     // set from the Grid.cs script
 
     public static GameState gameState = GameState.Playing;
     public static GameController Instance;
@@ -21,6 +26,23 @@ public class GameController : MonoBehaviour
         {
             Instance = this;
         }
+
+        HUDScript.SetCoins(coins);
+    }
+
+    public void AddCoins(int _coins)
+    {
+        coins += _coins;
+
+        // If player collected all the coins, then he won the game
+        if (coins >= totalCoins)
+        {
+            gameState = GameState.GameCompleted;
+
+            HUDScript.DisplayGameCompleted();
+        }
+
+        HUDScript.SetCoins(coins);
     }
 }
 

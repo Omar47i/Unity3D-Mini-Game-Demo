@@ -48,7 +48,7 @@ public class Turret : MonoBehaviour
 
                 GameObject bullet = Instantiate(projectile, firePosition.position, Quaternion.identity);
 
-                bullet.GetComponent<Projectile>().InitializeBullet(transform.rotation, transform.forward, projectileSpeed, player.position, player.GetComponent<Rigidbody>().velocity);
+                bullet.GetComponent<Projectile>().InitializeBullet(firePosition.position, projectileSpeed, player.position, player.GetComponent<Rigidbody>().velocity);
             }
         }
         else
