@@ -21,16 +21,11 @@ public class PlayerInput : MonoBehaviour
         float horAxis = Input.GetAxisRaw("Horizontal");
         float verAxis = Input.GetAxisRaw("Vertical");
 
-        //Vector3 moveDir = transform.TransformDirection(horAxis, 0f, verAxis);
-        //Vector3 moveDir = new Vector3(horAxis, 0f, verAxis);
         Vector3 moveDir = mainCamera.TransformDirection(horAxis, 0f, verAxis);
 
+        Vector3 vel = rb.velocity;
         rb.velocity = moveDir * speed;
-
-        //if (horAxis == 0f && verAxis == 0f)
-        //{
-        //    rb.velocity = Vector3.zero;
-        //}
+        rb.velocity = new Vector3(rb.velocity.x, vel.y, rb.velocity.z);
     }
 
     void Update()
