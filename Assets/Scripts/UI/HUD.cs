@@ -39,6 +39,8 @@ public class HUD : MonoBehaviour
 
     public void OnRestart()
     {
+        GameController.gameState = GameController.GameState.Playing;
+
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 }

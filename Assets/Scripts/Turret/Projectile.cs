@@ -21,7 +21,8 @@ public class Projectile : MonoBehaviour {
     {
         Vector3 predictedPoint = FirstOrderIntercept(shooterPos, Vector3.zero, projSpeed, playerPos, playerVel);
 
-        rb.velocity = projSpeed * (predictedPoint - transform.position);
+        rb.AddRelativeForce(projSpeed * (predictedPoint - transform.position).normalized, ForceMode.VelocityChange);
+        //rb.velocity = projSpeed * (predictedPoint - transform.position).normalized;
 
         Debug.DrawRay(transform.position, predictedPoint - transform.position, Color.red);
     }
@@ -85,14 +86,8 @@ public class Projectile : MonoBehaviour {
         //handle similar velocities
         if (Mathf.Abs(a) < 0.001f)
         {
-            float t = -targetRelativePosition.sqrMagnitude /
-            (
-                2f * Vector3.Dot
-                (
-                    targetRelativeVelocity,
-                    targetRelativePosition
-                )
-            );
+            float t = -targetRelativePosition.sqrMagnitude /(2f * Vector3.Dot(targetRelativeVelocity,
+                targetRelativePosition));
             return Mathf.Max(t, 0f); //don't shoot back in time
         }
 
